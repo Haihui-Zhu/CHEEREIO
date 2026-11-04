@@ -15,11 +15,11 @@
 
 # Turn on/off different steps. This will allow you to come back to this
 # script and set up different stages later.
-SetupTemplateRundir=false
-CompileTemplateRundir=true
+SetupTemplateRundir=true
+CompileTemplateRundir=false
 SetupSpinupRun=false
 SetupControlRun=false
-SetupEnsembleRuns=true
+SetupEnsembleRuns=false
 
 printf " \n"
 printf "   ___    _  _     ___     ___     ___     ___     ___     ___   \n"

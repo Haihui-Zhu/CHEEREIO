@@ -9,7 +9,7 @@
 #
 # Optional ens_config keys (all keyed by species, e.g. {"PM10": "..."}):
 #   EPAsites_obs_column : CSV column holding observations   (default "pm10_ambient" for PM10)
-#   EPAsites_gc_field   : GEOS-Chem history variable to use (default "PM10_ambient" for PM10, else the species name)
+#   EPAsites_gc_field   : GEOS-Chem history variable to use (default "PM10" for PM10, else the species name)
 
 from datetime import datetime, timedelta
 from glob import glob

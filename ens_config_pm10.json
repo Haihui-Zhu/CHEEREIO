@@ -84,45 +84,41 @@
 	"comment010" : "**********************SPECIFY BELOW HISTORY.RC SETTINGS**********************",
 	"comment011" : "******************************************************************************",
 	"HISTORY_collections_to_customize" : [
-		"ERASEPM",
-		"Restart"
+		"SpeciesConc",
+		"Restart",
+		"AerosolMass"
 	],
 	"HISTORY_freq" : "00000001 000000",
 	"HISTORY_dur" : "00000001 000000",
 	"SPINUP_HISTORY_freq" : "00000100 000000",
 	"SPINUP_HISTORY_dur" : "00000100 000000",
-	"SaveLevelEdgeDiags" : "True",
+	"SaveLevelEdgeDiags" : "False",
 	"SaveStateMet" : "True",
 	"SaveArea" : "False",
 	"SaveSatDiagn" : "False",
 	"HistoryExtraCollectionsToRead" : [
-		"ERASEPM"
+		"AerosolMass"
 	],
-	"HistoryERASEPMToSave" : [
-		"SpeciesConcVV_DSTbin1",
-		"SpeciesConcVV_DSTbin2",
-		"SpeciesConcVV_DSTbin3",
-		"SpeciesConcVV_DSTbin4",
-		"SpeciesConcVV_DSTbin5",
-		"SpeciesConcVV_DSTbin6",
-		"SpeciesConcVV_DSTbin7",
+	"HistoryAerosolMassToSave" : [
 		"PM10"
 	],
 	"HistorySpeciesConcToSave" : [
+		"DSTbin1",
+		"DSTbin2",
+		"DSTbin3",
+		"DSTbin4",
+		"DSTbin5",
+		"DSTbin6",
+		"DSTbin7"
 	],
 	"HistoryRestartToSave" : [
 		"SpeciesRst_?ALL?",
+		"Chem_AeroH2OSNA",
 		"Chem_H2O2AfterChem",
 		"Chem_SO2AfterChem",
 		"Chem_DryDepNitrogen",
 		"Chem_WetDepNitrogen",
-		"Chem_KPPHvalue",
-		"Chem_StatePSC",
 		"Met_DELPDRY",
-		"Met_PS1WET",
-		"Met_PS1DRY",
-		"Met_SPHU1",
-		"Met_TMPU1",
 		"Met_BXHEIGHT",
 		"Met_TropLev"
 	],
@@ -174,7 +170,151 @@
 	"comment016" : "********************SPECIFY BELOW SCALING FACTOR SETTINGS*********************",
 	"comment017" : "******************************************************************************",
 	"sf_initialization":{
-		"PM10":{
+		"DSTbin1":{
+			"sf_dim":"2D",
+			"init_std_dev":"0.1",
+			"correlatedInitialScalings":"True",
+			"corrDistances":"500",
+			"lognormalErrors" : "True",
+			"MaskOceanScaleFactor" :"True",
+			"MaskCoastsGT25pctOcean" : "True",
+			"Mask60NScaleFactor" : "False",
+			"Mask60SScaleFactor" : "True",
+			"2D_settings":{
+				"speedyCorrelationApprox" : "True",
+				"additional_init_perturbation_from_emis" : {
+					"do_add_pert":"False",
+					"file":{
+						"file":"",
+						"variable":""
+					},
+					"max_pert":"",
+					"saturation":""
+				}
+			},
+			"1D_settings":{}
+		},
+		"DSTbin2":{
+			"sf_dim":"2D",
+			"init_std_dev":"0.1",
+			"correlatedInitialScalings":"True",
+			"corrDistances":"500",
+			"lognormalErrors" : "True",
+			"MaskOceanScaleFactor" :"True",
+			"MaskCoastsGT25pctOcean" : "True",
+			"Mask60NScaleFactor" : "False",
+			"Mask60SScaleFactor" : "True",
+			"2D_settings":{
+				"speedyCorrelationApprox" : "True",
+				"additional_init_perturbation_from_emis" : {
+					"do_add_pert":"False",
+					"file":{
+						"file":"",
+						"variable":""
+					},
+					"max_pert":"",
+					"saturation":""
+				}
+			},
+			"1D_settings":{}
+		},
+		"DSTbin3":{
+			"sf_dim":"2D",
+			"init_std_dev":"0.1",
+			"correlatedInitialScalings":"True",
+			"corrDistances":"500",
+			"lognormalErrors" : "True",
+			"MaskOceanScaleFactor" :"True",
+			"MaskCoastsGT25pctOcean" : "True",
+			"Mask60NScaleFactor" : "False",
+			"Mask60SScaleFactor" : "True",
+			"2D_settings":{
+				"speedyCorrelationApprox" : "True",
+				"additional_init_perturbation_from_emis" : {
+					"do_add_pert":"False",
+					"file":{
+						"file":"",
+						"variable":""
+					},
+					"max_pert":"",
+					"saturation":""
+				}
+			},
+			"1D_settings":{}
+		},
+		"DSTbin4":{
+			"sf_dim":"2D",
+			"init_std_dev":"0.1",
+			"correlatedInitialScalings":"True",
+			"corrDistances":"500",
+			"lognormalErrors" : "True",
+			"MaskOceanScaleFactor" :"True",
+			"MaskCoastsGT25pctOcean" : "True",
+			"Mask60NScaleFactor" : "False",
+			"Mask60SScaleFactor" : "True",
+			"2D_settings":{
+				"speedyCorrelationApprox" : "True",
+				"additional_init_perturbation_from_emis" : {
+					"do_add_pert":"False",
+					"file":{
+						"file":"",
+						"variable":""
+					},
+					"max_pert":"",
+					"saturation":""
+				}
+			},
+			"1D_settings":{}
+		},
+		"DSTbin5":{
+			"sf_dim":"2D",
+			"init_std_dev":"0.1",
+			"correlatedInitialScalings":"True",
+			"corrDistances":"500",
+			"lognormalErrors" : "True",
+			"MaskOceanScaleFactor" :"True",
+			"MaskCoastsGT25pctOcean" : "True",
+			"Mask60NScaleFactor" : "False",
+			"Mask60SScaleFactor" : "True",
+			"2D_settings":{
+				"speedyCorrelationApprox" : "True",
+				"additional_init_perturbation_from_emis" : {
+					"do_add_pert":"False",
+					"file":{
+						"file":"",
+						"variable":""
+					},
+					"max_pert":"",
+					"saturation":""
+				}
+			},
+			"1D_settings":{}
+		},
+		"DSTbin6":{
+			"sf_dim":"2D",
+			"init_std_dev":"0.1",
+			"correlatedInitialScalings":"True",
+			"corrDistances":"500",
+			"lognormalErrors" : "True",
+			"MaskOceanScaleFactor" :"True",
+			"MaskCoastsGT25pctOcean" : "True",
+			"Mask60NScaleFactor" : "False",
+			"Mask60SScaleFactor" : "True",
+			"2D_settings":{
+				"speedyCorrelationApprox" : "True",
+				"additional_init_perturbation_from_emis" : {
+					"do_add_pert":"False",
+					"file":{
+						"file":"",
+						"variable":""
+					},
+					"max_pert":"",
+					"saturation":""
+				}
+			},
+			"1D_settings":{}
+		},
+		"DSTbin7":{
 			"sf_dim":"2D",
 			"init_std_dev":"0.1",
 			"correlatedInitialScalings":"True",
@@ -200,16 +340,40 @@
 		}
 	},		
 	"MinimumScalingFactorAllowed" : {
-		"PM10":"nan"
+		"DSTbin1":"nan",
+		"DSTbin2":"nan",
+		"DSTbin3":"nan",
+		"DSTbin4":"nan",
+		"DSTbin5":"nan",
+		"DSTbin6":"nan",
+		"DSTbin7":"nan"
 	},
 	"MaximumScalingFactorAllowed" : {
-		"PM10":"nan"
+		"DSTbin1":"nan",
+		"DSTbin2":"nan",
+		"DSTbin3":"nan",
+		"DSTbin4":"nan",
+		"DSTbin5":"nan",
+		"DSTbin6":"nan",
+		"DSTbin7":"nan"
 	},
 	"InflateScalingsToXOfInitialStandardDeviation" : {
-		"PM10":"nan"
+		"DSTbin1":"nan",
+		"DSTbin2":"nan",
+		"DSTbin3":"nan",
+		"DSTbin4":"nan",
+		"DSTbin5":"nan",
+		"DSTbin6":"nan",
+		"DSTbin7":"nan"
 	},
 	"MaximumScaleFactorRelativeChangePerAssimilationPeriod" : {
-		"PM10":"nan"
+		"DSTbin1":"nan",
+		"DSTbin2":"nan",
+		"DSTbin3":"nan",
+		"DSTbin4":"nan",
+		"DSTbin5":"nan",
+		"DSTbin6":"nan",
+		"DSTbin7":"nan"
 	},
 	"comment018" : "******************************************************************************",
 	"comment019" : "*************************SPECIFY BELOW LETKF SETTINGS*************************",

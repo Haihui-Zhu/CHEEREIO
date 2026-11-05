@@ -6,7 +6,7 @@
 ## Read user settings. Modify ens_config.json (not this script) if at all possible!
 ##=======================================================================
 
-source setup_ensemble_prelims.sh #get the relevant variables.
+# source setup_ensemble_prelims.sh #get the relevant variables.
 
 # Copy run directory files directly from GEOS-Chem repository
 
@@ -81,7 +81,7 @@ if [[ ${met_name_lc} = "merra2" ]]; then
   RUNDIR_VARS+="RUNDIR_MET_FIELD_CONFIG='HEMCO_Config.rc.gmao_metfields'\n"
 elif [[ ${met_name_lc} = "geosfp" ]]; then
     met="geosfp"
-        shared_met_settings=${gcdir}/run/shared/settings/geosfp.txt
+        shared_met_settings=${gcdir}/run/shared/settings/geosfp/geosfp.preprocessed_ll.txt  # GC Classic lat-lon GEOS-FP (same file GEOS-Chem's createRunDir.sh uses)
   RUNDIR_VARS+="RUNDIR_MET_FIELD_CONFIG='HEMCO_Config.rc.gmao_metfields'\n"
 elif [[ ${met_name} = "ModelE2.1" ]]; then
   met="ModelE2.1"

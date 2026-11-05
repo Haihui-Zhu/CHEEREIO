@@ -198,12 +198,46 @@ class HISTORY_Translator():
 			if collection in ['SpeciesConc','StateMet','LevelEdgeDiags']:
 				continue #already handled
 			else:
+				if f"History{collection}ToSave" in list(self.spc_config.keys()):
+					self.addCollectionIfMissing(collection)
 				for num,line in enumerate(self.lines):
 					if f"#'{collection}'," in line:
 						self.lines[num] = self.lines[num].replace('#','')
 						break
 				if f"History{collection}ToSave" in list(self.spc_config.keys()):
 					self.customizeSection(collection)
+	#User-defined collections (e.g. ERASEPM) are not in the default GEOS-Chem HISTORY.rc. If one is missing, add it to the
+	#COLLECTIONS list and append a daily time-averaged definition; customizeSection then fills in History<collection>ToSave
+	#and updateHistoryCollectionsDurationFrequency sets HISTORY_freq/HISTORY_dur.
+	def addCollectionIfMissing(self,collection):
+		if len(self.findSectionLines(collection))==2:
+			return #already defined
+		print(f'Collection {collection} not found in HISTORY.rc; adding a definition for it.')
+		entry = f"'{collection}',"
+		listed = any(line.replace('COLLECTIONS:','').strip().lstrip('#').strip().startswith(entry) for line in self.lines)
+		if not listed:
+			for num,line in enumerate(self.lines):
+				if line.startswith('COLLECTIONS:'):
+					self.lines.insert(num+1, f"             '{collection}',\n")
+					break
+			else:
+				raise ValueError('Could not find the COLLECTIONS list in HISTORY.rc.')
+		pad = ' '*max(1,13-len(collection))
+		block = ["#==============================================================================\n",
+			f"# %%%%% THE {collection} COLLECTION %%%%%\n",
+			"#\n",
+			"# Added by CHEEREIO from History{0}ToSave in ens_config.json\n".format(collection),
+			"#==============================================================================\n",
+			f"  {collection}.template:{pad}'%y4%m2%d2_%h2%n2z.nc4',\n",
+			f"  {collection}.format:{pad}  'CFIO',\n",
+			f"  {collection}.frequency:{' '*(17-len(collection))}00000001 000000\n",
+			f"  {collection}.duration:{' '*(18-len(collection))}00000001 000000\n",
+			f"  {collection}.mode:{pad}    'time-averaged'\n",
+			f"  {collection}.fields:{pad}  'PLACEHOLDER',\n",
+			"::\n"]
+		if len(self.lines)>0 and not self.lines[-1].endswith('\n'):
+			self.lines[-1] += '\n' #default HISTORY.rc ends with '::' and no newline
+		self.lines.extend(["\n"]+block)
 	def writeHistoryConfig(self):
 		with open(self.historyrc_path+'HISTORY.rc', 'w') as f:
 			for line in self.lines:

@@ -35,6 +35,8 @@ timestamp = timestamp[0:4]+'-'+timestamp[4:6]+'-'+timestamp[6:8]
 
 if len(spc_config["REGION"])==0:
 	gridlabel = spc_config["RES"]
+elif spc_config["REGION"]=="Custom":
+	gridlabel = f'Custom_{spc_config["met_name"]}' #Grid built from LONS, LATS and RES in ens_config.json (see toolbox.makeCustomNestedLatLon)
 else:
 	gridlabel = f'{spc_config["REGION"]}_{spc_config["met_name"]}'
 

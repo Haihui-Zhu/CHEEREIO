@@ -1,0 +1,57 @@
+#------------------------------------------------------------------------------
+#                  GEOS-Chem Global Chemical Transport Model                  !
+#------------------------------------------------------------------------------
+#BOP
+#
+# !MODULE: HEMCO_Diagn.rc 
+#
+# !DESCRIPTION: Configuration file for netCDF diagnostic output from HEMCO.
+#\\
+#\\
+# !REMARKS:
+#  For more information about scheduling HEMCO diagnostics, see:
+#  http://wiki.geos-chem.org/The_HEMCO_User%27s_Guide#Diagnostics
+#
+#  For a list of species by inventory, please see:
+#  http://wiki.geos-chem.org/HEMCO_data_directories#Default_GEOS-Chem_emissions_configurations
+#
+#  All diagnostics will now be saved out in units of kg/m2/s.  If necessary, 
+#  you can convert hydrocarbon species to e.g. kg C/m2/s in post-processing.
+#
+#  This file has been customized for the aerosol-only simulation.
+#
+# !REVISION HISTORY:
+#  13 Feb 2018 - E. Lundgren - Initial version
+#  30 Jan 2019 - R. Yantosca - Changed units to kg/m2/s
+#  08 Feb 2019 - R. Yantosca - Validated that all sectors sum to the total
+#EOP
+#------------------------------------------------------------------------------
+#BOC
+# Name             Spec  ExtNr  Cat Hier Dim OutUnit       LongName
+
+###############################################################################
+#####  Dust emissions                                                     ##### 
+###############################################################################
+EmisDSTbin1_Total     DSTbin1   -1     -1  -1   2   kg/m2/s  DSTbin1_emission_flux_from_all_sectors
+EmisDSTbin1_Anthro    DSTbin1   0      1   -1   2   kg/m2/s  DSTbin1_emission_flux_from_anthropogenic
+EmisDSTbin1_Natural   DSTbin1   0      3   -1   2   kg/m2/s  DSTbin1_emission_flux_from_natural_sources
+EmisDSTbin2_Total     DSTbin2   -1     -1  -1   2   kg/m2/s  DSTbin2_emission_flux_from_all_sectors
+EmisDSTbin2_Anthro    DSTbin2   0      1   -1   2   kg/m2/s  DSTbin2_emission_flux_from_anthropogenic
+EmisDSTbin2_Natural   DSTbin2   0      3   -1   2   kg/m2/s  DSTbin2_emission_flux_from_natural_sources
+EmisDSTbin3_Total     DSTbin3   -1     -1  -1   2   kg/m2/s  DSTbin3_emission_flux_from_all_sectors
+EmisDSTbin3_Anthro    DSTbin3   0      1   -1   2   kg/m2/s  DSTbin3_emission_flux_from_anthropogenic
+EmisDSTbin3_Natural   DSTbin3   0      3   -1   2   kg/m2/s  DSTbin3_emission_flux_from_natural_sources
+EmisDSTbin4_Total     DSTbin4   -1     -1  -1   2   kg/m2/s  DSTbin4_emission_flux_from_all_sectors
+EmisDSTbin4_Anthro    DSTbin4   0      1   -1   2   kg/m2/s  DSTbin4_emission_flux_from_anthropogenic
+EmisDSTbin4_Natural   DSTbin4   0      3   -1   2   kg/m2/s  DSTbin4_emission_flux_from_natural_sources
+EmisDSTbin5_Total     DSTbin5   -1     -1  -1   2   kg/m2/s  DSTbin5_emission_flux_from_all_sectors
+EmisDSTbin5_Anthro    DSTbin5   0      1   -1   2   kg/m2/s  DSTbin5_emission_flux_from_anthropogenic
+EmisDSTbin5_Natural   DSTbin5   0      3   -1   2   kg/m2/s  DSTbin5_emission_flux_from_natural_sources
+EmisDSTbin6_Total     DSTbin6   -1     -1  -1   2   kg/m2/s  DSTbin6_emission_flux_from_all_sectors
+EmisDSTbin6_Anthro    DSTbin6   0      1   -1   2   kg/m2/s  DSTbin6_emission_flux_from_anthropogenic
+EmisDSTbin6_Natural   DSTbin6   0      3   -1   2   kg/m2/s  DSTbin6_emission_flux_from_natural_sources
+EmisDSTbin7_Total     DSTbin7   -1     -1  -1   2   kg/m2/s  DSTbin7_emission_flux_from_all_sectors
+EmisDSTbin7_Anthro    DSTbin7   0      1   -1   2   kg/m2/s  DSTbin7_emission_flux_from_anthropogenic
+EmisDSTbin7_Natural   DSTbin7   0      3   -1   2   kg/m2/s  DSTbin7_emission_flux_from_natural_sources
+
+#EOC

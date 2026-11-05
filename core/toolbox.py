@@ -12,6 +12,37 @@ def calcDist_km(lat1,lon1,lat2,lon2):
 	d = gd.great_circle(coords_1, coords_2).km #This approximation is fine.
 	return d
 
+#Grid cell centers of a custom nested domain, reproducing GEOS-Chem Classic (GeosUtil/gc_grid_mod.F90 and
+#GeosCore/input_mod.F90): the first cell is the first global cell center >= the minimum bound, and
+#NX = floor((LonMax-LonMin)/DX), NY = floor((LatMax-LatMin)/DY). Bounds are "min max" strings in LONS and LATS.
+#E.g. LONS "-124.5 -105.5", LATS "24 42" at 0.25x0.3125 gives 60 lons (-124.375 to -105.9375) and 72 lats (24 to 41.75).
+def makeCustomNestedLatLon(spc_config=None):
+	if spc_config is None:
+		spc_config = getSpeciesConfig()
+	res = spc_config['RES']
+	if res == '0.5x0.625':
+		dlat,dlon = 0.5,0.625
+	elif res == '0.25x0.3125':
+		dlat,dlon = 0.25,0.3125
+	else:
+		raise ValueError(f'Custom nested grids are only supported at 0.5x0.625 and 0.25x0.3125, not {res}.')
+	try:
+		lonmin,lonmax = [float(v) for v in spc_config['LONS'].split()]
+		latmin,latmax = [float(v) for v in spc_config['LATS'].split()]
+	except (KeyError, ValueError):
+		raise ValueError('For REGION Custom, set LONS and LATS in ens_config.json as "min max", e.g. "LONS": "-124.5 -105.5", "LATS": "24.0 42.0".')
+	if (lonmin >= lonmax) or (latmin >= latmax):
+		raise ValueError(f'LONS and LATS must be ordered "min max"; got LONS {spc_config["LONS"]}, LATS {spc_config["LATS"]}.')
+	fulllon = -180.0 + (dlon*np.arange(0.0,np.round(360.0/dlon),1.0))
+	fulllat = -90.0 + (dlat*np.arange(0.0,np.round(180.0/dlat)+1,1.0))
+	nx = int(np.floor(np.round((lonmax-lonmin)/dlon,6)))
+	ny = int(np.floor(np.round((latmax-latmin)/dlat,6)))
+	i0 = np.where(fulllon >= lonmin-1e-6)[0]
+	j0 = np.where(fulllat >= latmin-1e-6)[0]
+	if (nx < 1) or (ny < 1) or (len(i0)==0) or (len(j0)==0) or (i0[0]+nx > len(fulllon)) or (j0[0]+ny > len(fulllat)):
+		raise ValueError(f'Custom domain LONS {spc_config["LONS"]}, LATS {spc_config["LATS"]} does not fit on the {res} global grid.')
+	return [fulllon[i0[0]:i0[0]+nx], fulllat[j0[0]:j0[0]+ny], res]
+
 def makeLatLonGridWithMask(gridlabel,mask_coast_bool="True"):
 	mask = None
 	subhalf = False
@@ -72,6 +103,12 @@ def makeLatLonGridWithMask(gridlabel,mask_coast_bool="True"):
 		lon = np.arange(-130.0,-59.99, 0.3125)
 		lat = np.arange(9.75,60.01, 0.25)
 		subquarter = True
+	elif gridlabel.startswith('Custom_'): #CUSTOM NESTED GRID; bounds from LONS and LATS in ens_config.json
+		lon,lat,res = makeCustomNestedLatLon()
+		if res == '0.5x0.625':
+			subhalf = True
+		else:
+			subquarter = True
 	else:
 		raise ValueError('Scaling factor initialization utility does not recognize grid specification.')
 	#Handle the high res nested grid case.

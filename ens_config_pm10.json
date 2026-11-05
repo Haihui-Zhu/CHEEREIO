@@ -4,17 +4,19 @@
 	"comment002" : "***************************************************************************",
 	"GC_VERSION" : "14.4.1",
 	"RES" : "0.25x0.3125",
-	"met_name" : "MERRA2",
+	"met_name" : "GEOSFP",
 	"LEVS" : "47",
 	"NEST" : "T",
 	"REGION" : "Custom",
+	"LATS":"24.0 42.0",
+	"LONS":"-124.5 -105.5",
 	"ASSIM_PATH" : "/pierce-scratch/haihui/CHEEREIO",
 	"RUN_NAME" : "central-valley",
 	"MY_PATH" : "/pierce-scratch/haihui/cheereio_runs",
 	"DATA_PATH" : "/shared-scratch/GEOS-Chem/ExtData",
 	"CH4_HEMCO_ROOT" : "/n/seasasfs02/CH4_inversion/InputData/HEMCO",
 	"USE_CHEEREIO_TEMPLATE_CH4_HEMCO_Config" : "False",
-	"RESTART_FILE" : "/pierce-scratch/haihui/gcc_14.4.1/27.2019_CV_LAI2xp05/Restarts/GEOSChem.Restart.20181231_0000z.nc4",
+	"RESTART_FILE" : "/pierce-scratch/haihui/CHEEREIO/CV-LAI2xp05_2019_copy/Restarts/GEOSChem.Restart.20181231_0000z.nc4",
 	"BC_FILES" : "/pierce-scratch/haihui/gcc_14.4.1/BCs/GEOSChem.BoundaryConditions.$YYYY$MM$DD_$HH$MNz.nc4",
 	"sim_name" : "aerosol",
 	"chemgrid" : "trop+strat",
@@ -65,15 +67,18 @@
 	"comment007" : "****************SPECIFY BELOW SPECIES IN STATE/CONTROL VECTORS****************",
 	"comment008" : "******************************************************************************",
 	"STATE_VECTOR_CONC" : [
-	
 	],
 	"CONTROL_VECTOR_CONC" : [
-		"PM10"
 	],
 	"STATE_VECTOR_CONC_REPRESENTATION" : "3D",
 	"CONTROL_VECTOR_EMIS" : {
-		"DST_Anth":"PM10",
-		"DST_Nat":"PM10"
+		"DSTbin1":"PM10",
+		"DSTbin2":"PM10",
+		"DSTbin3":"PM10",
+		"DSTbin4":"PM10",
+		"DSTbin5":"PM10",
+		"DSTbin6":"PM10",
+		"DSTbin7":"PM10"
 	},
 	"comment009" : "******************************************************************************",
 	"comment010" : "**********************SPECIFY BELOW HISTORY.RC SETTINGS**********************",
@@ -90,6 +95,9 @@
 	"SaveStateMet" : "True",
 	"SaveArea" : "False",
 	"SaveSatDiagn" : "False",
+	"HistoryExtraCollectionsToRead" : [
+		"ERASEPM"
+	],
 	"HistoryERASEPMToSave" : [
 		"SpeciesConcVV_DSTbin1",
 		"SpeciesConcVV_DSTbin2",
@@ -131,30 +139,30 @@
 	"comment013" : "**********************SPECIFY BELOW OBSERVATION SETTINGS**********************",
 	"comment014" : "******************************************************************************",
 	"OBSERVED_SPECIES" : {
-		"PM10": "PM10"
+		"PM10_EPAsites": "PM10"
 	},
 	"OBS_TYPE" : {
-		"PM10":"OBSPACK"
+		"PM10_EPAsites":"EPAsites"
 	},
 	"ASSIMILATE_OBS" : {
-		"PM10":"True"
+		"PM10_EPAsites":"True"
 	},
 	"TROPOMI_dirs" : {
-		
 	},
 	"OMI_dirs" : {
-		
+	},
+	"EPAsites_dirs" : {
+		"PM10" : "/pierce-scratch/haihui/CHEEREIO/EPA_PM_csv"
 	},
 	"OBSPACK_dirs" : {
-		"PM10" : "/pierce-scratch/haihui/CHEEREIO/obspack"
 	},
 	"filter_obs_poleward_of_n_degrees" : {
-		"PM10":"60"
+		"PM10_EPAsites":"60"
 	},
 	"SaveDOFS" : "False",
 	"DOFS_filter" : "nan",
-	"ACTIVATE_OBSPACK" : "true",
-	"preprocess_raw_obspack_files" : "true",
+	"ACTIVATE_OBSPACK" : "false",
+	"preprocess_raw_obspack_files" : "false",
 	"raw_obspack_path" : "",
 	"gc_obspack_path" :  "",
 	"obspack_gc_input_file" : "",
@@ -207,36 +215,36 @@
 	"comment019" : "*************************SPECIFY BELOW LETKF SETTINGS*************************",
 	"comment020" : "******************************************************************************",
 	"REGULARIZING_FACTOR_GAMMA": {
-		"PM10_ObsPack":"0.1"
+		"PM10_EPAsites":"0.1"
 	},
 	"USE_DIFFERENT_GAMMA_FOR_BURN_IN" : {
-		"PM10_ObsPack":"False"
+		"PM10_EPAsites":"False"
 	},
 	"GAMMA_FOR_BURN_IN" : {
-		"PM10_ObsPack":""
+		"PM10_EPAsites":""
 	},
 	"OBS_ERROR": {
-		"PM10_ObsPack":"0.1"
+		"PM10_EPAsites":"0.1"
 	},
 	"OBS_ERROR_TYPE":{
-		"PM10_ObsPack":"relative"
+		"PM10_EPAsites":"relative"
 	},
 	"OBS_ERROR_SELF_CORRELATION" : {
-		"PM10_ObsPack":"0.15"
+		"PM10_EPAsites":"0.15"
 	},
 	"MIN_OBS_ERROR":{
-		"PM10_ObsPack":"0"
+		"PM10_EPAsites":"0"
 	},
 	"OTHER_OBS_ERROR_PARAMETERS":{
-		"PM10_ObsPack":{
+		"PM10_EPAsites":{
 			"transport_error":"0"
 		}
 	},
 	"AV_TO_GC_GRID" : {
-		"PM10_ObsPack":"True"
+		"PM10_EPAsites":"True"
 	},
 	"SUPER_OBSERVATION_FUNCTION":{
-		"PM10_ObsPack":"default"
+		"PM10_EPAsites":"default"
 	},
 	"SUPER_OBS_BEFORE_Hx":{},
 	"INFLATION_FACTOR": "0.04",
@@ -244,6 +252,7 @@
 	"MAXNUMOBS" : "3000",
 	"MINNUMOBS" : "1",
 	"LOCALIZATION_RADIUS_km" : "500",
+	"LOCALIZATION_RADIUS_by_observation":"",
 	"smooth_localization_with_gaspari_cohn" : "True",
 	"AveragePriorAndPosterior" : "False",
 	"PriorWeightinPriorPosteriorAverage" : "0.5",
@@ -283,13 +292,13 @@
 	"min_emis_value_to_plot" : "1e-14",
 	"min_emis_std_value_to_plot" : "1e-15",
 	"OBSERVATION_UNITS":{
-		"PM10_ObsPack": "ug/m3"
+		"PM10_EPAsites": "ug/m3"
 	},
 	"EXTRA_OBSDATA_FIELDS_TO_SAVE_TO_BIG_Y":{
-		"PM10_ObsPack" : []
+		"PM10_EPAsites" : []
 	},
 	"EXTRA_OBSDATA_FIELDS_TO_REGRID_AND_PLOT":{
-		"PM10_ObsPack" : []
+		"PM10_EPAsites" : []
 	},
 	"extra_plot_field_units":{
 	},

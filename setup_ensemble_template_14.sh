@@ -118,7 +118,7 @@ elif [[ ${grid_res} = "2x25" ]]; then
   RUNDIR_VARS+="$(cat ${gcdir}/run/shared/settings/2x25.txt)\n"
 elif [[ ${grid_res} = "05x0625" ]]; then
   RUNDIR_VARS+="$(cat ${gcdir}/run/shared/settings/05x0625.txt)\n"
-elif [[ ${res_num} = "025x03125" ]]; then
+elif [[ ${grid_res} = "025x03125" ]]; then
   RUNDIR_VARS+="$(cat ${gcdir}/run/shared/settings/025x03125.txt)\n"
 fi
 
@@ -158,10 +158,25 @@ if [[ ${grid_res} = "05x0625" ]] || [[ ${grid_res} = "025x03125" ]]; then
     elif [[ ${domain_name} = "custom" ]]; then
             grid_nest="CU"
             RUNDIR_VARS+="RUNDIR_GRID_DOMAIN_NAME='custom'\n"
-            RUNDIR_VARS+="RUNDIR_GRID_LON_RANGE='MinLon MaxLon'\n"
-            RUNDIR_VARS+="RUNDIR_GRID_LAT_RANGE='MinLat MaxLat'\n"
-            printf "\n  -- You will need to manually set longitude and latitude"
-            printf "\n     bounds in the Grid Menu of geoschem_config.yml!\n"
+            # Domain bounds come from LONS and LATS in ens_config.json (read into lon_range/lat_range
+            # by setup_ensemble_prelims.sh), each given as "min max", e.g. "LONS": "-124.5 -105.5".
+            read -r custom_lon_min custom_lon_max custom_lon_extra <<< "${lon_range}"
+            read -r custom_lat_min custom_lat_max custom_lat_extra <<< "${lat_range}"
+            num_regex='^-?[0-9]+(\.[0-9]+)?$'
+            for custom_val in "${custom_lon_min}" "${custom_lon_max}" "${custom_lat_min}" "${custom_lat_max}"; do
+                if ! [[ ${custom_val} =~ ${num_regex} ]] || [[ -n ${custom_lon_extra} ]] || [[ -n ${custom_lat_extra} ]]; then
+                    printf "\nERROR: For REGION Custom, set LONS and LATS in ens_config.json as two numbers each,"
+                    printf "\n       e.g. \"LONS\": \"-124.5 -105.5\", \"LATS\": \"24.0 42.0\". Current values: LONS='${lon_range}', LATS='${lat_range}'.\n"
+                    exit 1
+                fi
+            done
+            if ! awk -v a="${custom_lon_min}" -v b="${custom_lon_max}" -v c="${custom_lat_min}" -v d="${custom_lat_max}" 'BEGIN{exit !((a+0 < b+0) && (c+0 < d+0))}'; then
+                printf "\nERROR: LONS and LATS in ens_config.json must be ordered as \"min max\". Current values: LONS='${lon_range}', LATS='${lat_range}'.\n"
+                exit 1
+            fi
+            RUNDIR_VARS+="RUNDIR_GRID_LON_RANGE='[${custom_lon_min}, ${custom_lon_max}]'\n"
+            RUNDIR_VARS+="RUNDIR_GRID_LAT_RANGE='[${custom_lat_min}, ${custom_lat_max}]'\n"
+            printf "\n  -- Custom nested domain from ens_config.json: lon [${custom_lon_min}, ${custom_lon_max}], lat [${custom_lat_min}, ${custom_lat_max}]\n"
     else
         printf "Invalid horizontal grid domain option.\n"
     fi

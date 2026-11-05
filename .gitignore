@@ -132,3 +132,6 @@ dmypy.json
 
 # gc runs
 GCClassic
+
+# other
+lauch_claude.sh

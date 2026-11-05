@@ -22,6 +22,9 @@ class HIST_Translator(object):
 		'ObsPack': {'use' : useObsPack, 'glob' : f'{self.hist_dir}/GEOSChem.ObsPack*.nc4','diags' : 'HistoryObsPackToSave'},
 		'SatDiagn': {'use' : useSatDiagn, 'glob' : f'{self.hist_dir}/GEOSChem.SatDiagn*.nc4','diags' : 'HistorySatDiagnToSave'},
 		}
+		#Optional user-defined collections (e.g. a custom collection holding PM10 for surface-site operators)
+		for coll in self.spc_config.get('HistoryExtraCollectionsToRead', []):
+			colls_to_grab[coll] = {'use' : True, 'glob' : f'{self.hist_dir}/GEOSChem.{coll}.*.nc4', 'diags' : f'History{coll}ToSave'}
 		return colls_to_grab
 	def globSubDir(self,timeperiod,useLevelEdge = False, useStateMet = False, useObsPack = False, useSatDiagn = False):
 		subdir_lists = {}

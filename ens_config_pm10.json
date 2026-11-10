@@ -8,15 +8,15 @@
 	"LEVS" : "47",
 	"NEST" : "T",
 	"REGION" : "Custom",
-	"LATS":"24.0 42.0",
-	"LONS":"-124.5 -105.5",
+	"LATS":"29.0 42.0",
+	"LONS":"-124.5 -110.5",
 	"ASSIM_PATH" : "/pierce-scratch/haihui/CHEEREIO",
-	"RUN_NAME" : "central-valley",
+	"RUN_NAME" : "cv_3_sept-oct",
 	"MY_PATH" : "/pierce-scratch/haihui/cheereio_runs",
 	"DATA_PATH" : "/shared-scratch/GEOS-Chem/ExtData",
 	"CH4_HEMCO_ROOT" : "/n/seasasfs02/CH4_inversion/InputData/HEMCO",
 	"USE_CHEEREIO_TEMPLATE_CH4_HEMCO_Config" : "False",
-	"RESTART_FILE" : "/pierce-scratch/haihui/CHEEREIO/CV-LAI2xp05_2019_copy/Restarts/GEOSChem.Restart.20181231_0000z.nc4",
+	"RESTART_FILE" : "/pierce-scratch/haihui/CHEEREIO/CV-LAI2xp05_2019_copy/Restarts/GEOSChem.Restart.20190907_0000z.nc4",
 	"BC_FILES" : "/pierce-scratch/haihui/gcc_14.4.1/BCs/GEOSChem.BoundaryConditions.$YYYY$MM$DD_$HH$MNz.nc4",
 	"sim_name" : "aerosol",
 	"chemgrid" : "trop+strat",
@@ -24,28 +24,28 @@
 	"DO_SPINUP" : "false",
 	"SPINUP_START" : "",
 	"SPINUP_END" : "",
-	"DO_CONTROL_RUN" : "false",
-	"DO_CONTROL_WITHIN_ENSEMBLE_RUNS" : "false",
+	"DO_CONTROL_RUN" : "true",
+	"DO_CONTROL_WITHIN_ENSEMBLE_RUNS" : "true",
 	"CONTROL_START" : "",
 	"CONTROL_END" : "",
 	"DO_ENS_SPINUP" : "false",
 	"ENS_SPINUP_FROM_BC_RESTART" : "false",
 	"ENS_SPINUP_START" : "",
 	"ENS_SPINUP_END" : "",
-	"START_DATE" : "20181231",
-	"ASSIM_START_DATE" : "20190101",
+	"START_DATE" : "20190907",
+	"ASSIM_START_DATE" : "20190921",
 	"SIMPLE_SCALE_FOR_FIRST_ASSIM_PERIOD" : "true",
 	"OBSERVATIONS_TO_EXCLUDE_FROM_SCALING" : [],
-	"END_DATE" : "20190112",
+	"END_DATE" : "20191101",
 	"AMPLIFY_ENSEMBLE_SPREAD_FOR_FIRST_ASSIM_PERIOD" : "false",
 	"SPREAD_AMPLIFICATION_FACTOR" : "5",
 	"species_to_amplify_not_in_statevec" : [
 	],
 	"DO_BURN_IN" : "true",
 	"SIMPLE_SCALE_AT_END_OF_BURN_IN_PERIOD" : "true",
-	"BURN_IN_END" : "20190106",
-	"POSTPROCESS_START_DATE":"20190107",
-	"POSTPROCESS_END_DATE":"20190112",
+	"BURN_IN_END" : "20190930",
+	"POSTPROCESS_START_DATE":"20190930",
+	"POSTPROCESS_END_DATE":"20191101",
 	"nEnsemble" : "6",
 	"verbose":"2",
 	"comment003" : "***************************************************************************",
@@ -72,13 +72,13 @@
 	],
 	"STATE_VECTOR_CONC_REPRESENTATION" : "3D",
 	"CONTROL_VECTOR_EMIS" : {
-		"DSTbin1":"PM10",
-		"DSTbin2":"PM10",
-		"DSTbin3":"PM10",
-		"DSTbin4":"PM10",
-		"DSTbin5":"PM10",
-		"DSTbin6":"PM10",
-		"DSTbin7":"PM10"
+		"DST":["DSTbin1",
+		"DSTbin2",
+		"DSTbin3",
+		"DSTbin4",
+		"DSTbin5",
+		"DSTbin6",
+		"DSTbin7"]
 	},
 	"comment009" : "******************************************************************************",
 	"comment010" : "**********************SPECIFY BELOW HISTORY.RC SETTINGS**********************",
@@ -123,9 +123,6 @@
 		"Met_TropLev"
 	],
 	"HistoryStateMetToSave" : [
-		"Met_TropLev",
-		"Met_BXHEIGHT",
-		"Met_T"
 	],
 	"HistorySatDiagnToSave" : [
 	],
@@ -170,151 +167,7 @@
 	"comment016" : "********************SPECIFY BELOW SCALING FACTOR SETTINGS*********************",
 	"comment017" : "******************************************************************************",
 	"sf_initialization":{
-		"DSTbin1":{
-			"sf_dim":"2D",
-			"init_std_dev":"0.1",
-			"correlatedInitialScalings":"True",
-			"corrDistances":"500",
-			"lognormalErrors" : "True",
-			"MaskOceanScaleFactor" :"True",
-			"MaskCoastsGT25pctOcean" : "True",
-			"Mask60NScaleFactor" : "False",
-			"Mask60SScaleFactor" : "True",
-			"2D_settings":{
-				"speedyCorrelationApprox" : "True",
-				"additional_init_perturbation_from_emis" : {
-					"do_add_pert":"False",
-					"file":{
-						"file":"",
-						"variable":""
-					},
-					"max_pert":"",
-					"saturation":""
-				}
-			},
-			"1D_settings":{}
-		},
-		"DSTbin2":{
-			"sf_dim":"2D",
-			"init_std_dev":"0.1",
-			"correlatedInitialScalings":"True",
-			"corrDistances":"500",
-			"lognormalErrors" : "True",
-			"MaskOceanScaleFactor" :"True",
-			"MaskCoastsGT25pctOcean" : "True",
-			"Mask60NScaleFactor" : "False",
-			"Mask60SScaleFactor" : "True",
-			"2D_settings":{
-				"speedyCorrelationApprox" : "True",
-				"additional_init_perturbation_from_emis" : {
-					"do_add_pert":"False",
-					"file":{
-						"file":"",
-						"variable":""
-					},
-					"max_pert":"",
-					"saturation":""
-				}
-			},
-			"1D_settings":{}
-		},
-		"DSTbin3":{
-			"sf_dim":"2D",
-			"init_std_dev":"0.1",
-			"correlatedInitialScalings":"True",
-			"corrDistances":"500",
-			"lognormalErrors" : "True",
-			"MaskOceanScaleFactor" :"True",
-			"MaskCoastsGT25pctOcean" : "True",
-			"Mask60NScaleFactor" : "False",
-			"Mask60SScaleFactor" : "True",
-			"2D_settings":{
-				"speedyCorrelationApprox" : "True",
-				"additional_init_perturbation_from_emis" : {
-					"do_add_pert":"False",
-					"file":{
-						"file":"",
-						"variable":""
-					},
-					"max_pert":"",
-					"saturation":""
-				}
-			},
-			"1D_settings":{}
-		},
-		"DSTbin4":{
-			"sf_dim":"2D",
-			"init_std_dev":"0.1",
-			"correlatedInitialScalings":"True",
-			"corrDistances":"500",
-			"lognormalErrors" : "True",
-			"MaskOceanScaleFactor" :"True",
-			"MaskCoastsGT25pctOcean" : "True",
-			"Mask60NScaleFactor" : "False",
-			"Mask60SScaleFactor" : "True",
-			"2D_settings":{
-				"speedyCorrelationApprox" : "True",
-				"additional_init_perturbation_from_emis" : {
-					"do_add_pert":"False",
-					"file":{
-						"file":"",
-						"variable":""
-					},
-					"max_pert":"",
-					"saturation":""
-				}
-			},
-			"1D_settings":{}
-		},
-		"DSTbin5":{
-			"sf_dim":"2D",
-			"init_std_dev":"0.1",
-			"correlatedInitialScalings":"True",
-			"corrDistances":"500",
-			"lognormalErrors" : "True",
-			"MaskOceanScaleFactor" :"True",
-			"MaskCoastsGT25pctOcean" : "True",
-			"Mask60NScaleFactor" : "False",
-			"Mask60SScaleFactor" : "True",
-			"2D_settings":{
-				"speedyCorrelationApprox" : "True",
-				"additional_init_perturbation_from_emis" : {
-					"do_add_pert":"False",
-					"file":{
-						"file":"",
-						"variable":""
-					},
-					"max_pert":"",
-					"saturation":""
-				}
-			},
-			"1D_settings":{}
-		},
-		"DSTbin6":{
-			"sf_dim":"2D",
-			"init_std_dev":"0.1",
-			"correlatedInitialScalings":"True",
-			"corrDistances":"500",
-			"lognormalErrors" : "True",
-			"MaskOceanScaleFactor" :"True",
-			"MaskCoastsGT25pctOcean" : "True",
-			"Mask60NScaleFactor" : "False",
-			"Mask60SScaleFactor" : "True",
-			"2D_settings":{
-				"speedyCorrelationApprox" : "True",
-				"additional_init_perturbation_from_emis" : {
-					"do_add_pert":"False",
-					"file":{
-						"file":"",
-						"variable":""
-					},
-					"max_pert":"",
-					"saturation":""
-				}
-			},
-			"1D_settings":{}
-		},
-		"DSTbin7":{
+		"DST":{
 			"sf_dim":"2D",
 			"init_std_dev":"0.1",
 			"correlatedInitialScalings":"True",
@@ -340,46 +193,22 @@
 		}
 	},		
 	"MinimumScalingFactorAllowed" : {
-		"DSTbin1":"nan",
-		"DSTbin2":"nan",
-		"DSTbin3":"nan",
-		"DSTbin4":"nan",
-		"DSTbin5":"nan",
-		"DSTbin6":"nan",
-		"DSTbin7":"nan"
+		"DST":"nan"
 	},
 	"MaximumScalingFactorAllowed" : {
-		"DSTbin1":"nan",
-		"DSTbin2":"nan",
-		"DSTbin3":"nan",
-		"DSTbin4":"nan",
-		"DSTbin5":"nan",
-		"DSTbin6":"nan",
-		"DSTbin7":"nan"
+		"DST":"nan"
 	},
 	"InflateScalingsToXOfInitialStandardDeviation" : {
-		"DSTbin1":"nan",
-		"DSTbin2":"nan",
-		"DSTbin3":"nan",
-		"DSTbin4":"nan",
-		"DSTbin5":"nan",
-		"DSTbin6":"nan",
-		"DSTbin7":"nan"
+		"DST":"nan"
 	},
 	"MaximumScaleFactorRelativeChangePerAssimilationPeriod" : {
-		"DSTbin1":"nan",
-		"DSTbin2":"nan",
-		"DSTbin3":"nan",
-		"DSTbin4":"nan",
-		"DSTbin5":"nan",
-		"DSTbin6":"nan",
-		"DSTbin7":"nan"
+		"DST":"nan"
 	},
 	"comment018" : "******************************************************************************",
 	"comment019" : "*************************SPECIFY BELOW LETKF SETTINGS*************************",
 	"comment020" : "******************************************************************************",
 	"REGULARIZING_FACTOR_GAMMA": {
-		"PM10_EPAsites":"0.1"
+		"PM10_EPAsites":"1"
 	},
 	"USE_DIFFERENT_GAMMA_FOR_BURN_IN" : {
 		"PM10_EPAsites":"False"
@@ -416,7 +245,9 @@
 	"MAXNUMOBS" : "3000",
 	"MINNUMOBS" : "1",
 	"LOCALIZATION_RADIUS_km" : "500",
-	"LOCALIZATION_RADIUS_by_observation":"",
+	"LOCALIZATION_RADIUS_by_observation":{
+		"PM10_EPAsites":"500"
+	},
 	"smooth_localization_with_gaspari_cohn" : "True",
 	"AveragePriorAndPosterior" : "False",
 	"PriorWeightinPriorPosteriorAverage" : "0.5",

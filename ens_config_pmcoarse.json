@@ -8,10 +8,10 @@
 	"LEVS" : "47",
 	"NEST" : "T",
 	"REGION" : "Custom",
-	"LATS":"29.0 42.0",
+	"LATS":"29.0 43.0",
 	"LONS":"-124.5 -110.5",
 	"ASSIM_PATH" : "/pierce-scratch/haihui/CHEEREIO",
-	"RUN_NAME" : "cv_3_sept-oct",
+	"RUN_NAME" : "cv7",
 	"MY_PATH" : "/pierce-scratch/haihui/cheereio_runs",
 	"DATA_PATH" : "/shared-scratch/GEOS-Chem/ExtData",
 	"CH4_HEMCO_ROOT" : "/n/seasasfs02/CH4_inversion/InputData/HEMCO",
@@ -33,7 +33,7 @@
 	"ENS_SPINUP_START" : "",
 	"ENS_SPINUP_END" : "",
 	"START_DATE" : "20190907",
-	"ASSIM_START_DATE" : "20190921",
+	"ASSIM_START_DATE" : "20190914",
 	"SIMPLE_SCALE_FOR_FIRST_ASSIM_PERIOD" : "false",
 	"OBSERVATIONS_TO_EXCLUDE_FROM_SCALING" : [],
 	"END_DATE" : "20191101",
@@ -43,10 +43,10 @@
 	],
 	"DO_BURN_IN" : "true",
 	"SIMPLE_SCALE_AT_END_OF_BURN_IN_PERIOD" : "false",
-	"BURN_IN_END" : "20190930",
-	"POSTPROCESS_START_DATE":"20190907",
+	"BURN_IN_END" : "20190921",
+	"POSTPROCESS_START_DATE":"20190921",
 	"POSTPROCESS_END_DATE":"20191101",
-	"nEnsemble" : "6",
+	"nEnsemble" : "12",
 	"verbose":"2",
 	"comment003" : "***************************************************************************",
 	"comment004" : "***************************BEGIN CLUSTER SETTINGS**************************",
@@ -54,8 +54,8 @@
 	"NumCores" : "4",
 	"NumCtrlCores" : "4",
 	"Partition" : "batch",
-	"Memory" : "16000",
-	"EnsCtrlSpinupMemory" : "16000",
+	"Memory" : "12000",
+	"EnsCtrlSpinupMemory" : "12000",
 	"WallTime" : "7-00\\:00",
 	"EnsSpinupWallTime" : "1-00\\:00",
 	"ControlWallTime" : "0-04\\:00",
@@ -100,7 +100,7 @@
 		"AerosolMass"
 	],
 	"HistoryAerosolMassToSave" : [
-		"PM10"
+		"PMcoarse"
 	],
 	"HistorySpeciesConcToSave" : [
 		"DSTbin1",
@@ -132,25 +132,25 @@
 	"comment013" : "**********************SPECIFY BELOW OBSERVATION SETTINGS**********************",
 	"comment014" : "******************************************************************************",
 	"OBSERVED_SPECIES" : {
-		"PM10_EPAsites": "PM10"
+		"PMcoarse_EPAsites": "PMcoarse"
 	},
 	"OBS_TYPE" : {
-		"PM10_EPAsites":"EPAsites"
+		"PMcoarse_EPAsites":"EPAsites"
 	},
 	"ASSIMILATE_OBS" : {
-		"PM10_EPAsites":"True"
+		"PMcoarse_EPAsites":"True"
 	},
 	"TROPOMI_dirs" : {
 	},
 	"OMI_dirs" : {
 	},
 	"EPAsites_dirs" : {
-		"PM10" : "/pierce-scratch/haihui/CHEEREIO/EPA_PM_csv"
+		"PMcoarse" : "/pierce-scratch/haihui/CHEEREIO/EPA_PM_csv"
 	},
 	"OBSPACK_dirs" : {
 	},
 	"filter_obs_poleward_of_n_degrees" : {
-		"PM10_EPAsites":"60"
+		"PMcoarse_EPAsites":"60"
 	},
 	"SaveDOFS" : "False",
 	"DOFS_filter" : "nan",
@@ -161,7 +161,7 @@
 	"obspack_gc_input_file" : "",
 	"HistoryObsPackToSave" : [
 		"pressure",
-		"PM10"
+		"PMcoarse"
 	],
 	"comment015" : "******************************************************************************",
 	"comment016" : "********************SPECIFY BELOW SCALING FACTOR SETTINGS*********************",
@@ -169,13 +169,13 @@
 	"sf_initialization":{
 		"DST":{
 			"sf_dim":"2D",
-			"init_std_dev":"0.1",
+			"init_std_dev":"0.5",
 			"correlatedInitialScalings":"True",
 			"corrDistances":"500",
 			"lognormalErrors" : "True",
 			"MaskOceanScaleFactor" :"True",
 			"MaskCoastsGT25pctOcean" : "True",
-			"Mask60NScaleFactor" : "False",
+			"Mask60NScaleFactor" : "True",
 			"Mask60SScaleFactor" : "True",
 			"2D_settings":{
 				"speedyCorrelationApprox" : "True",
@@ -193,51 +193,51 @@
 		}
 	},		
 	"MinimumScalingFactorAllowed" : {
-		"DST":"nan"
+		"DST":"0.001"
 	},
 	"MaximumScalingFactorAllowed" : {
-		"DST":"nan"
+		"DST":"1000"
 	},
 	"InflateScalingsToXOfInitialStandardDeviation" : {
 		"DST":"nan"
 	},
 	"MaximumScaleFactorRelativeChangePerAssimilationPeriod" : {
-		"DST":"nan"
+		"DST":"0.5"
 	},
 	"comment018" : "******************************************************************************",
 	"comment019" : "*************************SPECIFY BELOW LETKF SETTINGS*************************",
 	"comment020" : "******************************************************************************",
 	"REGULARIZING_FACTOR_GAMMA": {
-		"PM10_EPAsites":"1"
+		"PMcoarse_EPAsites":"1"
 	},
 	"USE_DIFFERENT_GAMMA_FOR_BURN_IN" : {
-		"PM10_EPAsites":"False"
+		"PMcoarse_EPAsites":"False"
 	},
 	"GAMMA_FOR_BURN_IN" : {
-		"PM10_EPAsites":""
+		"PMcoarse_EPAsites":""
 	},
 	"OBS_ERROR": {
-		"PM10_EPAsites":"0.1"
+		"PMcoarse_EPAsites":"0.3"
 	},
 	"OBS_ERROR_TYPE":{
-		"PM10_EPAsites":"relative"
+		"PMcoarse_EPAsites":"relative"
 	},
 	"OBS_ERROR_SELF_CORRELATION" : {
-		"PM10_EPAsites":"0.15"
+		"PMcoarse_EPAsites":"0.15"
 	},
 	"MIN_OBS_ERROR":{
-		"PM10_EPAsites":"0"
+		"PMcoarse_EPAsites":"2"
 	},
 	"OTHER_OBS_ERROR_PARAMETERS":{
-		"PM10_EPAsites":{
+		"PMcoarse_EPAsites":{
 			"transport_error":"0"
 		}
 	},
 	"AV_TO_GC_GRID" : {
-		"PM10_EPAsites":"True"
+		"PMcoarse_EPAsites":"True"
 	},
 	"SUPER_OBSERVATION_FUNCTION":{
-		"PM10_EPAsites":"default"
+		"PMcoarse_EPAsites":"default"
 	},
 	"SUPER_OBS_BEFORE_Hx":{},
 	"INFLATION_FACTOR": "0.04",
@@ -246,14 +246,14 @@
 	"MINNUMOBS" : "1",
 	"LOCALIZATION_RADIUS_km" : "500",
 	"LOCALIZATION_RADIUS_by_observation":{
-		"PM10_EPAsites":"500"
+		"PMcoarse_EPAsites":"500"
 	},
 	"smooth_localization_with_gaspari_cohn" : "True",
 	"AveragePriorAndPosterior" : "False",
 	"PriorWeightinPriorPosteriorAverage" : "0.5",
 	"AverageScaleFactorPosteriorWithPrior" : "False",
 	"PriorWeightinSFAverage" : "0.5",
-	"Activate_Relaxation_To_Prior_Spread" : "False",
+	"Activate_Relaxation_To_Prior_Spread" : "True",
 	"RTPS_parameter" : "0.9",
 	"species_not_in_statevec_to_RTPS" : [
 	],
@@ -275,25 +275,25 @@
 	"animation_fps_concentrations":"18",
 	"omit_diff_cells_with_fewer_than_n_observations":"10",
 	"hemco_diags_to_process" : [
-		"EmisDSTbin1_Anthro",
-		"EmisDSTbin2_Anthro",
-		"EmisDSTbin3_Anthro",
-		"EmisDSTbin4_Anthro",
-		"EmisDSTbin5_Anthro",
-		"EmisDSTbin6_Anthro",
-		"EmisDSTbin7_Anthro"
+		"EmisDSTbin1_Total",
+		"EmisDSTbin2_Total",
+		"EmisDSTbin3_Total",
+		"EmisDSTbin4_Total",
+		"EmisDSTbin5_Total",
+		"EmisDSTbin6_Total",
+		"EmisDSTbin7_Total"
 	],
 	"useLogScaleForEmissionsMaps" : "False",
 	"min_emis_value_to_plot" : "1e-14",
 	"min_emis_std_value_to_plot" : "1e-15",
 	"OBSERVATION_UNITS":{
-		"PM10_EPAsites": "ug/m3"
+		"PMcoarse_EPAsites": "ug/m3"
 	},
 	"EXTRA_OBSDATA_FIELDS_TO_SAVE_TO_BIG_Y":{
-		"PM10_EPAsites" : []
+		"PMcoarse_EPAsites" : []
 	},
 	"EXTRA_OBSDATA_FIELDS_TO_REGRID_AND_PLOT":{
-		"PM10_EPAsites" : []
+		"PMcoarse_EPAsites" : []
 	},
 	"extra_plot_field_units":{
 	},
